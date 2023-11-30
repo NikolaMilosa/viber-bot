@@ -12,7 +12,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 mutex = Lock()
-DB = "~/db.json"
+DB = "db.json"
 try:
 	with open(DB, "x") as file:
 		# Write initial content if needed
