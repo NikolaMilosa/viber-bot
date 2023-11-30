@@ -43,6 +43,7 @@ jobs:
         EMAIL: ${{ secrets.EMAIL }}
         PASS: ${{ secrets.PASS }}
         VIBER_BOT_KEY: ${{ secrets.VIBER_BOT_KEY }}
+        URL: ${{ secrets.URL }}
       run: |
         python bot.py  # Adjust this based on your script
 
