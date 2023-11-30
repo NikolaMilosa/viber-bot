@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "sot-bot"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "sot_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+viberbot = "^1.0.12"
+requests = "^2.31.0"
+flask = "^3.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
