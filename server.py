@@ -68,12 +68,19 @@ def subscribe(data):
         json.dump(current, db)
 
 def unsubscribe(data):
-	with open(DB, 'r+') as db:
-		current = json.load(db)
-		if 'subscribes' not in current:
-			current['subscribers'] = []
-		
-		current['subscribers'] = [user for user in current['subscribers'] if user['id'] != data['user_id']]
-		db.seek(0)
-		db.truncate()
-		json.dump(current, db)
+    with open(DB, 'r+') as db:
+        current = json.load(db)
+        if 'subscribes' not in current:
+            current['subscribers'] = []
+
+        # Create a new list without the user to be unsubscribed
+        user_id = data['user_id']
+        current['subscribers'] = [user for user in current['subscribers'] if user['id'] != user_id]
+
+        # Move the file cursor to the beginning and truncate any remaining content
+        db.seek(0)
+        db.truncate()
+
+        # Write the updated data back to the file
+        json.dump(current, db)
+
