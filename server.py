@@ -12,9 +12,9 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 mutex = Lock()
-
+DB = "~/db.json"
 try:
-	with open('db.json', "x") as file:
+	with open(DB, "x") as file:
 		# Write initial content if needed
 		file.write("{}")
 
@@ -40,12 +40,12 @@ def webhook():
 
 @app.route('/', methods=['GET'])
 def get_subscriber_data():
-	with open('db.json', 'r+') as db:
+	with open(DB, 'r+') as db:
 		current = json.load(db)
 		return jsonify(current)
 
 def subscribe(data):
-    with open('db.json', 'r+') as db:
+    with open(DB, 'r+') as db:
         current = json.load(db)
         if 'subscribers' not in current:
             current['subscribers'] = []
@@ -68,7 +68,7 @@ def subscribe(data):
         json.dump(current, db)
 
 def unsubscribe(data):
-	with open('db.json', 'r+') as db:
+	with open(DB, 'r+') as db:
 		current = json.load(db)
 		if 'subscribes' not in current:
 			current['subscribers'] = []
