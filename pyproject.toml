@@ -11,6 +11,7 @@ python = "^3.8"
 viberbot = "^1.0.12"
 requests = "^2.31.0"
 flask = "^3.0.0"
+gunicorn = "^21.2.0"
 
 
 [build-system]

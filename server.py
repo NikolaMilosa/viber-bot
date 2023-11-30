@@ -72,6 +72,3 @@ def unsubscribe(data):
 		db.seek(0)
 		db.truncate()
 		json.dump(current, db)
-
-
-app.run()
