@@ -57,4 +57,4 @@ jobs:
         with:
           app-name: 'sotex-viberbot'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_468B288A407C46F2A420C42B89FFECA9 }}
