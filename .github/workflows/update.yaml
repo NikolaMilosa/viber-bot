@@ -2,6 +2,8 @@ name: 'Update'
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '30 10 * * 1-5'
 
 jobs:
   build:
@@ -42,6 +44,7 @@ jobs:
       env:
         EMAIL: ${{ secrets.EMAIL }}
         PASS: ${{ secrets.PASS }}
+        VIBER_BOT_KEY: ${{ secrets.VIBER_BOT_KEY }}
       run: |
         python bot.py  # Adjust this based on your script
 

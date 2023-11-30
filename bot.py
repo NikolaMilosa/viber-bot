@@ -19,9 +19,10 @@ def get_logger():
     return logger
 
 def configure_bot():
+    auth_token = os.environ.get("VIBER_BOT_KEY")
     bot_config = BotConfiguration(
         name="SotexBarman",
-        auth_token="52057ba18fe7e593-65d0f453b77eefb7-241a16412454093d",
+        auth_token=auth_token,
         avatar="https://dl-media.viber.com/1/share/2/long/vibes/icon/image/0x0/3e5d/21be6c0328b1b1bba8d806b9f4626958a036abd03a6276e1c33b6db0b37c3e5d.jpg"
     )
 
