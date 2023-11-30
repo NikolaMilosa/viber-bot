@@ -45,22 +45,27 @@ def get_subscriber_data():
 		return jsonify(current)
 
 def subscribe(data):
-	with open('db.json', 'r+') as db:
-		current = json.load(db)
-		if 'subscribes' not in current:
-			current['subscribers'] = []
-		
-		for user in current['subscribers']:
-			if user['id'] == data['user']['id']:
-				return
+    with open('db.json', 'r+') as db:
+        current = json.load(db)
+        if 'subscribers' not in current:
+            current['subscribers'] = []
 
-		current['subscribers'].append({
-			'id': data['user']['id'],
-			'name': data['user']['name']
-		})
-		db.seek(0)
-		db.truncate()
-		json.dump(current, db)
+        # Check if the user is already subscribed
+        user_id = data['user']['id']
+        if any(user['id'] == user_id for user in current['subscribers']):
+            return
+
+        current['subscribers'].append({
+            'id': user_id,
+            'name': data['user']['name']
+        })
+
+        # Move the file cursor to the beginning and truncate any remaining content
+        db.seek(0)
+        db.truncate()
+
+        # Write the updated data back to the file
+        json.dump(current, db)
 
 def unsubscribe(data):
 	with open('db.json', 'r+') as db:

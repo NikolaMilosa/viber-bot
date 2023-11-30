@@ -34,7 +34,7 @@ def configure_bot(url):
 def get_accounts(url):
     response = requests.get(url).json()
     print(response)
-    return response['subscribers']
+    return response['subscribers'] if 'subscribers' in response else []
 
 def get_feed(email, password):
     headers = {
