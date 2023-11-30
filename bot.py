@@ -18,7 +18,7 @@ def get_logger():
     logger.addHandler(handler)
     return logger
 
-def configure_bot():
+def configure_bot(url):
     auth_token = os.environ.get("VIBER_BOT_KEY")
     bot_config = BotConfiguration(
         name="SotexBarman",
@@ -27,13 +27,14 @@ def configure_bot():
     )
 
     viber = Api(bot_config)
-    random_url = json.loads(requests.get('http://localhost:4040/api/tunnels').text)['tunnels'][0]["public_url"]
-    viber.set_webhook(random_url)
+    viber.set_webhook(url)
     
     return viber
 
-def get_accounts(viber):
-    return viber.get_account_info()['members']
+def get_accounts(url):
+    response = requests.get(url).json()
+    print(response)
+    return response['subscribers']
 
 def get_feed(email, password):
     headers = {
@@ -134,14 +135,15 @@ def format_message(topics):
 
 def main():
     get_logger()
-    viber = configure_bot()
 
     email = os.environ.get('EMAIL')
     password = os.environ.get('PASS')
+    url = os.environ.get("URL")
+    viber = configure_bot(url)
 
     message = format_message(get_feed(email, password))
 
-    for member in get_accounts(viber):
+    for member in get_accounts(url):
         viber.send_messages(to=member['id'],
 			     messages=[TextMessage(text=message)])
 
