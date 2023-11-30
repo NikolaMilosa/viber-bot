@@ -74,6 +74,4 @@ def unsubscribe(data):
 		json.dump(current, db)
 
 
-port = os.environ.get('PORT', 443)
-
-app.run(host='0.0.0.0', port=port, debug=True)
+app.run(host='0.0.0.0', port=80, debug=True)
