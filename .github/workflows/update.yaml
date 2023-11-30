@@ -21,23 +21,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt  # Adjust this based on your project
 
-    - name: Download and setup Ngrok
-      env: 
-        TOKEN: ${{ secrets.TOKEN }}
-      run: |
-        wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
-        tar xvzf ngrok-v3-stable-linux-amd64.tgz
-        chmod +x ngrok
-        ./ngrok config add-authtoken $TOKEN
-
-    - name: Run Ngrok in the background
-      run: |
-        ./ngrok http 8080 &
-
-    - name: Run Flask app in the background
-      run: |
-        python dummy.py &
-
     - name: Run Python script
       env:
         EMAIL: ${{ secrets.EMAIL }}
@@ -46,8 +29,3 @@ jobs:
         URL: ${{ secrets.URL }}
       run: |
         python bot.py  # Adjust this based on your script
-
-    - name: Cleanup
-      run: |
-        pkill grok
-        pkill python
