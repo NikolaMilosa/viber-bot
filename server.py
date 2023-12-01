@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 user = os.environ.get("MONGO_USER", "")
 password = os.environ.get("MONGO_PASS", "")
-uri = f"mongodb+srv://{user}:{password}@viberbotcluster.fyohhnr.mongodb.net/?retryWrites=true&w=majority&tls=false"
+uri = f"mongodb+srv://{user}:{password}@viberbotcluster.fyohhnr.mongodb.net/?retryWrites=true&w=majority"
 logger.debug(uri)
 client = MongoClient(uri)
 subscriptions = client.subs.subs
