@@ -34,7 +34,7 @@ def configure_bot(url):
 def get_accounts(url):
     response = requests.get(url).json()
     print(response)
-    return response['subscribers'] if 'subscribers' in response else []
+    return response if response else []
 
 def get_feed(email, password):
     headers = {
@@ -144,7 +144,7 @@ def main():
     message = format_message(get_feed(email, password))
 
     for member in get_accounts(url):
-        viber.send_messages(to=member['id'],
+        viber.send_messages(to=member['_id'],
 			     messages=[TextMessage(text=message)])
 
 if __name__ == "__main__":
