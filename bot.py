@@ -27,7 +27,7 @@ def configure_bot(url):
     )
 
     viber = Api(bot_config)
-    viber.set_webhook(url)
+    # viber.set_webhook(url)
     
     return viber
 
